@@ -24,10 +24,10 @@ function urnaEletronica() {
         nome3 = (prompt('Digite o nome do Candidato 3'));
         
         console.log('** NOMES DO CANDIDATOS**');
-        console.log('| 1 | Candidato 1:' + nome1);
-        console.log('| 2 | Candidato 2:' + nome2);
-        console.log('| 3 | Candidato 3:' + nome3);
-        console.log('| 5 | voto em Branco.');
+        console.log('| 1 |  Candidato 1 ', nome1);
+        console.log('| 2 |  Candidato 2 ', nome2);
+        console.log('| 3 |  Candidato 3 ', nome3);
+        console.log('| 5 |  Voto em Branco.');
         
         
     } while (!confirm('Se os nomes dos candidattos estão corretos clique OK para continuar, e CANCELAR para voltar e digitar os nomes novamente'));
@@ -39,7 +39,7 @@ function urnaEletronica() {
         
         if (opcao === 1) {
 
-            let confirmavoton = confirm('ATENÇÃO: seu voto será para:', nome1,('Deseja prosseguir?'));
+            let confirmavoton = confirm('ATENÇÃO: seu voto será para: ' + nome1 + ('\n\nDeseja prosseguir?'));
             
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ',nome1)     
@@ -50,7 +50,7 @@ function urnaEletronica() {
             
         } else if (opcao === 2) {
             
-            let confirmavoton = confirm('ATENÇÃO: seu voto será para'+ nome2,('Deseja prosseguir?'));
+            let confirmavoton = confirm('ATENÇÃO: seu voto será para:  ' + nome2 + ('\n\nDeseja prosseguir?'));
             
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ',nome2)     
@@ -60,7 +60,7 @@ function urnaEletronica() {
             
         } else if (opcao === 3) {
             
-            let confirmavoton = confirm('ATENÇÃO: seu voto será para' + nome3,('Deseja prosseguir?'));
+            let confirmavoton = confirm('ATENÇÃO: seu voto será para: ' + nome3 + ('\n\nDeseja prosseguir?'));
             
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ',nome3)     
@@ -108,8 +108,6 @@ function urnaEletronica() {
     console.log('Este é o total de votos para o Candidato:', nome3, ':', candidato3);
     console.log('Este é o total de votos para o Voto em Branco:', votobranco);
     console.log('Este é o total de votos para o Voto Nulo:', votonulo);
-    console.log('Contagem:', contador);
-
     console.log('------------------------------------------')
 
     const totaldevotos = (candidato1 + candidato2 + candidato3 + votobranco + votonulo);
@@ -133,7 +131,7 @@ function urnaEletronica() {
     console.log('------------------------------------------');
 
 
-    
+
 
 
     // determinação do ganhador
