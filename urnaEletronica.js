@@ -12,9 +12,16 @@ function urnaEletronica() {
     let nome2;
     let nome3;
     let senha = 0;
-    let confirme = "n";
-    
-    console.log('Início do programa')
+    let confirme;
+    let time = new Date();
+
+    console.log('Início do programa');
+    console.log('Começando a votação ás: ' + time.toLocaleString());
+
+    function timend() {
+        time = new Date();
+        return time;
+    }
 
     senha = parseInt(prompt('Digite sua senha de mesário'));
 
@@ -43,10 +50,10 @@ function urnaEletronica() {
             
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ',nome1)     
+                
                 candidato1++;
-
-            }
             
+            }
             
         } else if (opcao === 2) {
             
@@ -150,7 +157,8 @@ function urnaEletronica() {
     } else {
         console.log('Empate');
     }
-
+    
+    console.log(timend = new Date());
     console.log('\nFim do Programa');
 
 }
