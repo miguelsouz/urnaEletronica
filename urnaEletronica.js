@@ -14,6 +14,8 @@ function urnaEletronica() {
     let senha = 0;
     let confirme;
     let time = new Date();
+    let opcaoNome;
+    let primeiraconfirmação = true;
 
     console.log('Início do programa');
     console.log('Começando a votação ás: ' + time.toLocaleString());
@@ -26,15 +28,20 @@ function urnaEletronica() {
     senha = parseInt(prompt('Digite sua senha de mesário'));
 
     do {
-        nome1 = (prompt('Digite o nome do Candidato 1'));
-        nome2 = (prompt('Digite o nome do Candidato 2'));
-        nome3 = (prompt('Digite o nome do Candidato 3'));
+
+        let candidatos = [
+
+        [13, 'Luis Inácio LuLa da Silva', 'PT']
+        [22, 'Jair Messias Bolsonaro', 'PL']
+        [13, 'Padre Kelmon', 'PTB']
+        [13, 'Ciro Gomes', 'PDT']
+        [13, 'Simone Tebet', 'MDB']
+        ]
         
-        console.log('** NOMES DO CANDIDATOS**');
-        console.log('| 1 |  Candidato 1 ', nome1);
-        console.log('| 2 |  Candidato 2 ', nome2);
-        console.log('| 3 |  Candidato 3 ', nome3);
-        console.log('| 5 |  Voto em Branco.');
+        for (i = 0; i <= candidatos.length; i++) {
+
+            alert (`Nº: ${(candidatos[i][0])} | Nome do Candidato: ${candidatos[i][1]} | Partido: ${candidatos[i][2]}`);
+        }
         
         
     } while (!confirm('Se os nomes dos candidattos estão corretos clique OK para continuar, e CANCELAR para voltar e digitar os nomes novamente'));
