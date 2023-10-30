@@ -1,3 +1,25 @@
+
+function verificarIntegridadeUrna() {
+
+    fetch('./urnaEletronica.js')
+        .then(conteudo => conteudo.text())
+        .then(conteudo => CryptoJS.SHA256(conteudo).toString())
+        .then(hashUrnaAtual => {  
+            fetch('./hashVerificado')
+                .then(conteudo => conteudo.text())
+                    .then(hashVerificado => {
+                    if (hashUrnaAtual === hashVerificado) {
+                        console.log('Hash verificado, urna integra.')
+                    } else {
+                        console.log('HASHES DIFERENTES, URNA ADULTERADA!!')
+                        console.log(`Hash esperado: ${hashVerificado}`)
+                        console.log(`Hash da urna: ${hashUrnaAtual}`)
+                    }
+                })
+        });
+
+}
+
 function urnaEletronica() {
     
     // declaração de varivéis
@@ -166,6 +188,9 @@ function urnaEletronica() {
     }
     
     console.log(timend = new Date());
+
+    verificarIntegridadeUrna();
+
     console.log('\nFim do Programa');
 
 }
