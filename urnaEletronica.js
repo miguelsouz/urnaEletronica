@@ -1,6 +1,5 @@
 
 function verificarIntegridadeUrna() {
-
     fetch('./urnaEletronica.js')
         .then(conteudo => conteudo.text())
         .then(conteudo => CryptoJS.SHA256(conteudo).toString())
@@ -55,9 +54,9 @@ function urnaEletronica() {
 
         [13, 'Luis Inácio LuLa da Silva', 'PT']
         [22, 'Jair Messias Bolsonaro', 'PL']
-        [13, 'Padre Kelmon', 'PTB']
-        [13, 'Ciro Gomes', 'PDT']
-        [13, 'Simone Tebet', 'MDB']
+        [24, 'Padre Kelmon', 'PTB']
+        [57, 'Ciro Gomes', 'PDT']
+        [46, 'Voto Branco']
         ]
         
         for (i = 0; i <= candidatos.length; i++) {

@@ -7,8 +7,8 @@
 
 // }
 
-fetch('https://viacep.com.br/ws/06065150/json/').then(responde => console.log(response));
+// fetch('https://viacep.com.br/ws/06065150/json/').then(responde => console.log(response));
 
 
-// fetch(requisicao).then(resposta):
-fetch('chapolin.json');
+// // fetch(requisicao).then(resposta):
+// fetch('chapolin.json');
