@@ -1,25 +1,34 @@
 
-function verificarIntegridadeUrna() {
-    fetch('./urnaEletronica.js')
+async function verificarIntegridadeUrna() {
+
+    // Biblioteca CryptoJS: https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js
+
+    let hashUrnaAtual;
+    let hashVerificado;
+
+    await fetch('urnaEletronica.js')
         .then(conteudo => conteudo.text())
         .then(conteudo => CryptoJS.SHA256(conteudo).toString())
-        .then(hashUrnaAtual => {  
-            fetch('./hashVerificado')
-                .then(conteudo => conteudo.text())
-                    .then(hashVerificado => {
-                    if (hashUrnaAtual === hashVerificado) {
-                        console.log('Hash verificado, urna integra.')
-                    } else {
-                        console.log('HASHES DIFERENTES, URNA ADULTERADA!!')
-                        console.log(`Hash esperado: ${hashVerificado}`)
-                        console.log(`Hash da urna: ${hashUrnaAtual}`)
-                    }
-                })
-        });
+        .then(conteudo => hashUrnaAtual = conteudo);
+    
+    await fetch('hashVerificado')
+        .then(conteudo => conteudo.text())
+        .then(conteudo => hashVerificado = conteudo);
+        
+    return {
+        status: hashUrnaAtual === hashVerificado,
+        hashUrnaAtual: hashUrnaAtual,
+        hashVerificado: hashVerificado
+    };
 
 }
 
-function urnaEletronica() {
+async function audioConfirmacao() {
+    const audio = new Audio('./confirmacao.mp3');
+    await audio.play();
+}
+
+async function urnaEletronica() {
     
     // declaração de varivéis
     let candidato1 = 0;
@@ -73,6 +82,7 @@ function urnaEletronica() {
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ', candidato[0][1])     
                 candidato1++;
+                await audioConfirmacao();
             
             }
             
@@ -83,6 +93,7 @@ function urnaEletronica() {
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ',candidato[1][1])     
                 candidato2++;
+                await audioConfirmacao();
 
             }
             
@@ -93,6 +104,7 @@ function urnaEletronica() {
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ',candidato[2][1])     
                 candidato3++;
+                await audioConfirmacao();
 
             }
         } else if (opcao === 24) {
@@ -102,6 +114,7 @@ function urnaEletronica() {
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ',candidato[3][1])     
                 candidato4++;
+                await audioConfirmacao();
 
             }
 
@@ -112,6 +125,7 @@ function urnaEletronica() {
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ',candidato[4][1])     
                 candidato5++;
+                await audioConfirmacao();
 
             }
         } else if (opcao === 46) {
@@ -121,6 +135,7 @@ function urnaEletronica() {
             if (confirmavoton) {   
                 console.log('Voto confirmado para: ',candidato[5][1])     
                 votobranco++;
+                await audioConfirmacao();
 
             }
             
@@ -141,6 +156,7 @@ function urnaEletronica() {
             if (confirmavoton) {   
                 console.log('Voto confirmado como Nulo.')     
                 votonulo++;
+                await audioConfirmacao();
             }
         }
         
@@ -215,8 +231,17 @@ function urnaEletronica() {
     console.log('Começo da urna: ' + time.toLocaleString());
     console.log('Fim da urna: ', timend = new Date());
 
-    verificarIntegridadeUrna();
+    await verificarIntegridadeUrna().then(verificacao => {
+        if (verificacao.status) {
+            console.log('Hashes verificados, urna íntegra');
+        } else {
+            console.log('URNA ADULTERADA!');
+            console.log(`Hash da urna: ${verificacao.hashUrnaAtual}`);
+            console.log(`Hashe esperado: ${verificacao.hashVerificado}`);
+        }
 
-    console.log('\nFim do Programa');
+        console.log('\nFim do Programa');
+    })
+
 
 }
